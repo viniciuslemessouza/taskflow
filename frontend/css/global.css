@@ -5,16 +5,21 @@
 
 :root{
     font-size: 62.5%;
-    --main-bg-color: #fdfdfd;
+    --main-bg-color: #fff7e9;
     --main-color: #111827;
     --vertical-line-color: #ef4444;
-    --widgets-color: #2563eb;
+    --widgets-color: #2f38bd;
+    --line-height: 2.5rem;
+}
+
+body > *{
+    line-height: var(--line-height);
 }
 
 body{
     height: 100vh;
     min-width: 70rem;
-    font-size: 1.6rem;
+    font-size: calc(var(--line-height)/2);
     font-family: Arial, sans-serif;
     background-color: var(--main-bg-color);
     color: var(--main-color);
@@ -29,15 +34,15 @@ body::after{
     background-image: repeating-linear-gradient(
         to bottom,
         transparent,
-        transparent 24px,
-        #d1d5db 25px
+        transparent calc(var(--line-height) - 1px),
+        #00000080 var(--line-height)
     );
 }
 
 body::before{
     content: "";
     position: fixed;
-    left: 50px;
+    left: calc(var(--line-height) * 3);
     top: 0;
     height: 100vh;
     width: 0.2rem;
@@ -45,34 +50,40 @@ body::before{
     opacity: 0.6;
 }
 
+h1{
+    font-family: "Playwrite IE";
+}
+
 .navbar{
     display: flex;
     justify-content: space-between;
-    padding: 16px 24px;
+    padding: var(--line-height) calc(2 * var(--line-height));
+}
+
+h2{
+    line-height: var(--line-height);
 }
 
 .hero{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    height: calc(100% - 100px);
-    width: calc(100% - 60px);
+    margin-top: calc(var(--line-height) * 8);
+    width: calc(100% - 6rem);
+    height: calc(var(--line-height) * 4);
 }
 
 .hero .btn{
-    margin-top: 3rem;
+    margin-top: var(--line-height);
 }
 
-
 .btn{
+    font-family: "Indie Flower", sans-serif;
+    font-size: var(--line-height);
     width: fit-content;
-    background-color: var(--widgets-color);
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 6px;
+    color: var(--widgets-color);
+    border-radius: .6rem;
 }
 
 .content-wrapper{
@@ -80,6 +91,6 @@ body::before{
     flex-direction: column;
     max-width: 100rem;
     margin: 0 auto;
-    padding-left: 60px;
+    padding-left: 6rem;
     height: 100%;
 }
