@@ -94,3 +94,62 @@ h2{
     padding-left: 6rem;
     height: 100%;
 }
+
+.post-it{
+    padding: 2rem;
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem 0rem;
+    background-color: #fdff92;
+    min-width: 40rem;
+    min-height: 40rem;
+    transform: rotate(-5deg);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+    box-shadow: .1rem .1rem .2rem;
+}
+
+.post-it h2{
+    font-size: 4rem;
+    margin-top: 15%;
+}
+
+.post-it div{
+    font-family: "Playwrite IE";
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.post-it input{
+    letter-spacing: 2px;
+    background-color: transparent;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    width: 100%;
+    font-family: "Indie Flower";
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+.post-it input::selection{
+    background-color: #00000030;
+}
+
+.post-it input:focus{
+    outline: none;
+    caret-color: transparent;
+}
+
+.post-it::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    opacity: 0.05;
+    background-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
