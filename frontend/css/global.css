@@ -29,7 +29,7 @@ body::after{
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1000;
+    z-index: -1;
 
     background-image: repeating-linear-gradient(
         to bottom,
@@ -109,6 +109,7 @@ h2{
     transform-style: preserve-3d;
     will-change: transform;
     box-shadow: .1rem .1rem .2rem;
+    z-index: 1;
 }
 
 .post-it h2{
@@ -150,7 +151,7 @@ h2{
     left: 0;
     width: 100%;
     height: 15%;
-    opacity: 0.05;
+    opacity: 0.06;
     background-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
@@ -200,4 +201,23 @@ h2{
     transform: rotate(45deg);
     left: .3rem;
     top: -.5rem;
+}
+
+.forgot-password{
+    text-decoration: none;
+}
+
+.forgot-password:active{
+    color: inherit;
+}
+
+.submit-btn{
+    background-color: transparent;
+    padding: .6rem 1rem;
+    border: .1rem solid black;
+    border-radius: .4rem;
+}
+
+.submit-btn:hover{
+    border: .1rem solid #00000030;
 }
