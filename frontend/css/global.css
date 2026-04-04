@@ -240,3 +240,9 @@ h1{
 .terms-section li{
     margin-left: 1.6rem;
 }
+
+@media (max-width: 1000px) {
+    :root{
+        font-size: 100%;
+    }
+}
