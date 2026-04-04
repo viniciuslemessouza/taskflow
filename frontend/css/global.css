@@ -236,3 +236,7 @@ h1{
     transform: translateY(.5rem);
     font-size: 1.4rem;
 }
+
+.terms-section li{
+    margin-left: 1.6rem;
+}
