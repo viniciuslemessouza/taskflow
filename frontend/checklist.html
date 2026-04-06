@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+IE:wght@100..400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>    
     </head>
     <body>
         <div class="content-wrapper">
@@ -16,20 +17,49 @@
                 <a class="btn" href="perfil.html">Perfil</a>        
             </header>
             <main class="hero">
-                <h2 class="page-title">Checklist: <span class="listname">To do list</span></h2>
-                <ul class="task-list">
-                    <li class="task-item custom-checkbox non-set">
-                        <span class="list-item-number">001 - </span>
-                        <label for="item1">
-                            <input type="checkbox" name="item" id="item1">
-                            <span class="checkmark"></span>
-                            <input type="text">
-                            <button class="submit-btn" href="#">Add</button>
-                        </label>
+                <div class="list-header editing">
+                    <h2 class="page-title">To do list</h2>
+                    <div class="header-icons">
+                        <button class="material-symbols-outlined edit-icon" alt="edit list" herf="#">edit</button>
+                        <button class="material-symbols-outlined confirm-icon" alt="confirm list" herf="#">check</button>
+                        <button class="material-symbols-outlined delete-icon" alt="delete list" herf="#">delete</button>
+                    </div>
+                </div>
+                <ul class="task-list editing">
+                    <li class="task-item set">
+                        <p><span class="list-item-number">001</span> - </p>
+                        <form action="">
+                            <label class=custom-checkbox for="item1">
+                                <input type="checkbox" name="item" id="item1">
+                                <span class="checkmark"></span>
+                                <input type="text"  placeholder="Take the trash out">
+                            </label>
+                        </form>
+                        <button class="material-symbols-outlined submit-btn remove-item" href="#">remove</button>
                     </li>
-                    <li class="task-item add-item">
-                        <a href="#">+ Item</a>
+                    <li class="task-item set">
+                        <p><span class="list-item-number">002</span> - </p>
+                        <form action="">
+                            <label class=custom-checkbox for="item2">
+                                <input type="checkbox" name="item" id="item2">
+                                <span class="checkmark"></span>
+                                <input type="text"  placeholder="Stroll with the dog">
+                            </label>
+                        </form>
+                        <button class="material-symbols-outlined submit-btn remove-item" href="#">remove</button>
                     </li>
+                    <li class="task-item non-set">
+                        <p><span class="list-item-number">003</span> - </p>
+                        <form action="">
+                            <label class=custom-checkbox for="item1">
+                                <input type="checkbox" name="item" id="item1">
+                                <span class="checkmark"></span>
+                                <input type="text"  placeholder="Type the task">
+                            </label>
+                        </form>
+                        <button class="material-symbols-outlined submit-btn add-item" href="#">add</button> 
+                    </li>
+                </ul>
             </main>
         </div>
     </body>

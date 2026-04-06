@@ -15,6 +15,7 @@
 
 body > *{
     line-height: var(--line-height);
+    user-select: none;
 }
 
 body{
@@ -62,6 +63,10 @@ a:active{
     color: inherit;
 }
 
+.hide{
+    display: none;
+}
+
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -76,11 +81,6 @@ a:active{
     text-align: center;
     height: 100%;
     padding: calc(2 * var(--line-height)) 0rem;
-}
-
-.page-title{
-    font-size: calc(1.5 * var(--line-height));
-    margin-bottom: var(--line-height);
 }
 
 .btn{
@@ -169,11 +169,14 @@ a:active{
 
 .custom-checkbox .checkmark{
     display: flex;
+    box-sizing: border-box;
     margin-right: 1rem;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.8rem;
+    height: 1.8rem;
     border: .1rem solid black;
     border-radius: .4rem;
+    flex: 0 0 1.8rem;
+    transform: translateY(-.1rem);
 }
 
 .custom-checkbox:hover :not(input:checked) + .checkmark{
@@ -182,14 +185,11 @@ a:active{
 }
 
 .custom-checkbox input:checked + .checkmark::after{
-    display: block;
+    display: flex;
 }
 
 .custom-checkbox .checkmark::after{
     display: none;
-}
-
-.custom-checkbox .checkmark::after{
     position: relative;
     content: "";
     width: 1rem;
@@ -250,10 +250,6 @@ h2{
     transform: translateY(.2rem);
 }
 
-p{
-    transform: translateY(.4rem);
-}
-
 .desabled{
     color: var(--disable-color)
 }
@@ -270,55 +266,154 @@ p{
     background-color: #c6e4ff;
 }
 
+.list-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.page-title{
+    font-size: calc(1.5 * var(--line-height));
+    margin-bottom: var(--line-height);
+}
+
+.header-icons{
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+    align-items: center;
+    width: calc(4 * var(--line-height));
+    height: var(--line-height);
+}
+
+.header-icons button{
+    height: var(--line-height);
+    box-sizing: border-box;
+    border: .1rem solid transparent;
+    background-color: transparent;
+}
+
+.header-icons button:hover{
+    border: .1rem solid black;
+    border-radius: .2rem;
+}
+
+.header-icons .edit-icon{
+    display: flex;
+    color: blue;
+}
+
+.header-icons .confirm-icon{
+    display: none;
+    color: green;
+}
+
+.header-icons .delete-icon{
+    display: none;
+    color: red;
+}
+
+.editing .header-icons .edit-icon{
+    display: none;
+}
+
+.editing .header-icons .confirm-icon, 
+.editing .header-icons .delete-icon {
+    display: flex;
+}
+
 .task-list{
-    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 }
 
-.task-item{
+.task-list .task-item{
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
     width: 100%;
-    list-style: none;
+    height: var(--line-height);
 }
 
+.task-item > p, .task-item .list-item-number{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    user-select: none;
+}
+
+.task-item form,
 .task-item label{
     display: flex;
     width: 100%;
-    align-items: center;
 }
 
-.task-item input[type=text]{
-    box-sizing: border-box;
-    font-size: 1.6rem;
-    font-family: 'Courier New', Courier, monospace;
+.task-item .checkmark::after{
+    border: solid green;
+    border-width: 0rem .2rem .2rem 0rem;
+}
+
+.task-item input[type="text"]{
+    overflow: visible;
     display: flex;
-    margin: 0;
-    padding: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-family: 'Courier New', Courier, monospace;
     width: 100%;
     height: var(--line-height);
-    outline: none;
-    border: solid black;
-    border-width: 0rem 0rem .2rem 0rem;
-    line-height: var(--line-height);
     background-color: transparent;
+    border: none;
+    outline: none;
+    pointer-events: none;
 }
 
-.add-item a{
-    font-size: 1.8rem;
-    text-decoration: none;
-}
-
-.task-item.non-set .checkmark{
-    opacity: 0.3;
-}
-
-.list-item-number{
-    margin-right: 1rem;
+.task-item input[type="checkbox"]:checked ~ input[type="text"]{
+    text-decoration: line-through;
 }
 
 .task-item .submit-btn{
-    display: flex;
+    display: none;
+    font-size: 2rem;
+    justify-content: center;
     align-items: center;
-    font-size: 1.6rem;
-    height: var(--line-height);
+    width: calc(1.5 * var(--line-height));
+    height: calc(var(--line-height) - .3rem);
+    transform: translateY(-.1rem);
+}
+
+.submit-btn.remove-item{
+    color: red;
+}
+
+.submit-btn.add-item{
+    color: blue;
+}
+
+.task-item.non-set{
+    display: none;
+}
+
+.editing .task-item .submit-btn,
+.editing .task-item.non-set{
+    display: flex;
+}
+
+.editing .task-item .checkmark{
+    display: none;
+}
+
+.editing .task-item input[type="text"]{
+    display: flex;
+    pointer-events: all;
+    color: black;
+    font-weight: bold;
+}
+
+.task-item input[type="text"]::placeholder{
+    color: black;
+    font-weight: bold;
 }
