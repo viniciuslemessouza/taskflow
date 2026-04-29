@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% if title %}
+            <title>TaskFlow - {{ title }}</title>
+        {% else %}
+            <title>TaskFlow</title>
+        {% endif %}
+        <link rel="stylesheet" href="../static/css/global.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+IE:wght@100..400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content-wrapper">
+            <header class="navbar">
+                <h1>TaskFlow</h1>
+                {% if navbutton %}
+                    <a class="btn" href="login.html">{{ navbutton }}</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+            </header>
+            <main class="hero">
+                {% block content %}{% endblock content %}
+            </main>
+        </div>
+    </body>
+</html>

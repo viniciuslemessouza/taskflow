@@ -1,44 +1,25 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>TaskFlow</title>
-        <link rel="stylesheet" href="../static/css/global.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+IE:wght@100..400&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="content-wrapper">
-            <header class="navbar">
-                <h1>TaskFlow</h1> 
-                <a class="btn" href="register.html">Register</a>        
-            </header>
-            <main class="hero">
-                <form class="postit login-postit">
-                    <h2>Login</h2>
-                    <div>
-                        <label for="email">Email:</label>
-                        <input id="email" type="email">
-                    </div>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input id="password" type="password">
-                    </div>
-                    <div>
-                        <label class="remember-me custom-checkbox">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                            Remember me
-                        </label>
-                    </div>
-                    <div>
-                        <a class="forgot-password post-it-link" href="password_recovery.html">forgot password?</a>
-                        <button class="submit-btn">Submit</button>
-                    </div>
-                </form>
-            </main>
-        </div>
-    </body>
-</html>
+{% extends 'layout.html' %}
+{% block content %}
+<form class="postit login-postit">
+    <h2>Login</h2>
+    <div>
+        <label for="email">Email:</label>
+        <input id="email" type="email">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password">
+    </div>
+    <div>
+        <label class="remember-me custom-checkbox">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            Remember me
+        </label>
+    </div>
+    <div>
+        <a class="forgot-password post-it-link" href="password_recovery.html">forgot password?</a>
+        <button class="submit-btn">Submit</button>
+    </div>
+</form>
+{% endblock content %}
