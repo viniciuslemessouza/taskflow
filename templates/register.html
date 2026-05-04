@@ -1,4 +1,4 @@
-{% extends 'layout.hmtl' %}
+{% extends 'layout.html' %}
 {% block content %}
 <form class="postit register-postit">
     <h2>Register</h2>
@@ -18,9 +18,9 @@
             <label class="custom-checkbox">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                I agree to <a class="terms post-it-link" href="terms.html">terms</a>
+                I agree to <a class="terms post-it-link" href="{{url_for('terms')}}">terms</a>
             </label>
             <button class="submit-btn">Submit</button>
-        </div>
-    </form>
+    </div>
+</form>
 {% endblock content %}

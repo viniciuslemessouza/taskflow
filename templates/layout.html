@@ -8,17 +8,18 @@
         {% else %}
             <title>TaskFlow</title>
         {% endif %}
-        <link rel="stylesheet" href="../static/css/global.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/global.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+IE:wght@100..400&display=swap" rel="stylesheet">
+        <link rel="preconnect" href='https://fonts.gstatic.com' crossorigin>
+        <link href='https://fonts.googleapis.com/css2?family=Indie+Flower&family=Playwrite+IE:wght@100..400&display=swap' rel="stylesheet">
+        <link rel="icon" href="{{ url_for('static', filename='/assets/favicon.ico') }}">
     </head>
     <body>
         <div class="content-wrapper">
             <header class="navbar">
                 <h1>TaskFlow</h1>
-                {% if navbutton %}
-                    <a class="btn" href="login.html">{{ navbutton }}</a>
+                {% if button %}
+                    <a class="btn" href="{{ url_for(button.href) }}">{{ button.text }}</a>
                 {% else %}
                     <span></span>
                 {% endif %}
