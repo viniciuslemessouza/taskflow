@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+        <title>Taskflow - {{ title }}</title>
+    {% else %}
+        <title>Taskflow</title>
+    {% endif %}
+
+    {% block style %}{% endblock style %}
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <nav>
+                <h1 class="site-logo">TaskFlow</h1>
+                <ul class="nav-list">
+                    <li class="nav-list-item"><a href="#">Login</a></li>
+                    <li class="nav-list-item"><a href="#">Register</a></li>
+                    <li class="nav-list-item"><a href="#">Account</a></li>
+                    <li class="nav-list-item"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="hero">
+                {% block content %}{% endblock content %}
+            </div>
+        </main>
+        <footer>
+            <span class="copyright">All rights reserved TaskFlow &copy; 2026</span>
+        </footer>
+    </div>
+</body>
+</html>
