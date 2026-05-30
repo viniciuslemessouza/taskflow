@@ -17,12 +17,12 @@
     <div class="content-wrapper">
         <header>
             <nav>
-                <h1 class="site-logo">TaskFlow</h1>
+                <h1 class="site-logo"><a href="{{ url_for('main.home') }}">TaskFlow</a></h1>
                 <ul class="nav-list">
-                    <li class="nav-list-item"><a href="#">Login</a></li>
-                    <li class="nav-list-item"><a href="#">Register</a></li>
-                    <li class="nav-list-item"><a href="#">Account</a></li>
-                    <li class="nav-list-item"><a href="#">Logout</a></li>
+                    <li class="nav-list-item"><a href="{{ url_for('users.login') }}">Login</a></li>
+                    <li class="nav-list-item"><a href="{{ url_for('users.register') }}">Register</a></li>
+                    <li class="nav-list-item"><a href="{{ url_for('users.account') }}">Account</a></li>
+                    <li class="nav-list-item"><a href="{{ url_for('users.logout') }}">Logout</a></li>
                 </ul>
             </nav>
         </header>
