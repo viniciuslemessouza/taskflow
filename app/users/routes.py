@@ -19,6 +19,14 @@ def register():
     else:
         return render_template('users/register.html', title="Register", form=form)
 
+@users.route('/password_recovery', methods=['GET', 'POST'])
+def password_recovery():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        return redirect('home')
+    else:
+        return render_template('users/password_recovery.html', title="Password Recovery", form=form)
+
 @users.route('/account', methods=['GET', 'POST'])
 def account():
     form = AccountForm()
