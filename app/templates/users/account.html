@@ -1,6 +1,18 @@
 {% extends 'main/layout.html' %}
 {% block content %}
-    <form class="profile-form" method="POST" action="" novalidate>
-        <h2>Account</h2>
+    <form class="profile-form" method="POST" action="" enctype="multipart/form-data" novalidate>
+        <h2>My Account</h2>
+        <div class="profile-picture">
+            {{ form.profile_picture }}
+        </div>
+        <div class="form-row">
+            {{ form.fullname.label }} <span>:</span> {{ form.fullname }}
+        </div>
+        <div class="form-row">
+            {{ form.email.label }} <span>:</span> {{ form.email }}
+        </div>
+        <div class="form-row">
+            {{ form.submit }}
+        </div>
     </form>
 {% endblock content %}

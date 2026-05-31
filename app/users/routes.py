@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, flash
-from app.users.forms import LoginForm, RegisterForm
+from app.users.forms import LoginForm, RegisterForm, AccountForm
 
 users = Blueprint("users", __name__)
 
@@ -19,9 +19,10 @@ def register():
     else:
         return render_template('users/register.html', title="Register", form=form)
 
-@users.route('/account')
+@users.route('/account', methods=['GET', 'POST'])
 def account():
-    return render_template('users/account.html', title="Account")
+    form = AccountForm()
+    return render_template('users/account.html', title="Account", form=form)
 
 @users.route('/logout')
 def logout():
