@@ -1,10 +1,15 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, redirect, flash
+from app.users.forms import LoginForm
 
 users = Blueprint("users", __name__)
 
-@users.route('/login')
+@users.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('users/login.html', title="Login")
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('home')
+    else:
+        return render_template('users/login.html', title="Login", form=form)
 
 @users.route('/register')
 def register():
