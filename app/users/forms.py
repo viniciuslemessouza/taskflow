@@ -25,3 +25,8 @@ class AccountForm(FlaskForm):
 class PasswordRecoveryForm(FlaskForm):
     email = EmailField('Email', validators=[Email()])
     submit = SubmitField('Submit')
+
+class SetNewPassword(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Submit')

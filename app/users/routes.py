@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, flash
-from app.users.forms import LoginForm, RegisterForm, AccountForm, PasswordRecoveryForm
+from app.users.forms import LoginForm, RegisterForm, AccountForm, PasswordRecoveryForm, SetNewPassword
 
 users = Blueprint("users", __name__)
 
@@ -26,6 +26,14 @@ def password_recovery():
         return redirect('home')
     else:
         return render_template('users/password_recovery.html', title="Password Recovery", form=form)
+
+@users.route('/set_new_password', methods=['GET', 'POST'])
+def set_new_password():
+    form = SetNewPassword()
+    if form.validate_on_submit():
+        return redirect('home')
+    else:
+        return render_template('users/new_password.html', title="Password Recovery", form=form)
 
 @users.route('/account', methods=['GET', 'POST'])
 def account():
