@@ -33,7 +33,7 @@ def set_new_password():
     if form.validate_on_submit():
         return redirect('home')
     else:
-        return render_template('users/new_password.html', title="Password Recovery", form=form)
+        return render_template('users/new_password.html', title="New Password", form=form)
 
 @users.route('/account', methods=['GET', 'POST'])
 def account():

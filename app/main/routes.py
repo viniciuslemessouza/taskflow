@@ -6,3 +6,7 @@ main = Blueprint('main', __name__)
 @main.route('/home')
 def home():
     return render_template('main/index.html')
+
+@main.route('/terms')
+def terms():
+    return render_template('main/terms.html', title="Terms and Conditions")

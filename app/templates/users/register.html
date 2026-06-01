@@ -41,7 +41,7 @@
                 {{ form.terms }}
                 <label for="terms">
                     Agree to
-                    <a class="terms-link" href="#">
+                    <a class="terms-link" href="{{ url_for('main.terms') }}">
                         {{ form.terms.label.text }}
                     </a>
                 </label>
