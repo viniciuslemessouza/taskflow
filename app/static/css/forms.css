@@ -1,20 +1,20 @@
 .login-form{
-    background-color: aliceblue;
+    background-color: rgb(135, 199, 255);
     transform: translate(-50%, -50%) rotate(-1deg);
 }
 
 .register-form{
-    background-color: antiquewhite;
+    background-color: rgb(243, 181, 101);
     transform: translate(-50%, -50%) rotate(1deg);
 }
 
 .new-password-form{
-    background-color: beige;
+    background-color: rgb(255, 255, 80);
     transform: translate(-50%, -50%) rotate(-2deg);
 }
 
 .password-recovery-form{
-    background-color: wheat;
+    background-color: rgb(255, 194, 80);
     transform: translate(-50%, -50%) rotate(2deg);
 }
 
@@ -40,7 +40,7 @@
     content:"";
     width: 100%;
     height: 4rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 90%, transparent);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 90%, transparent);
 }
 
 .post-it h2{
@@ -71,6 +71,7 @@
     border-bottom: 1px solid black;
     outline: none;
     background-color: transparent;
+    padding: 0rem 1rem;
 }
 
 .form-row a{
