@@ -47,14 +47,12 @@
                 </label>
             </div>
             {% if form.terms.errors %}
-                <div class="validation-errors-popup">
+                <div class="validation-errors-popup error-color">
                     {% for error in form.terms.errors %}
                         <span class="validation-error">{{ error }}</span>
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>
-        <div class="form-row">
             {{ form.submit }}
         </div>
     </form>
