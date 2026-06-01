@@ -1,0 +1,68 @@
+.login-form{
+    background-color: aliceblue;
+}
+
+.register-form{
+    background-color: antiquewhite;
+}
+
+.new-password-form{
+    background-color: beige;
+}
+
+.password-recovery-form{
+    background-color: wheat;
+}
+
+.post-it{
+    font-family: 'Courier New', Courier, monospace;
+    width: 40rem;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--line-height);
+    padding-top: calc(3 * var(--line-height));
+    gap: 2rem;
+    box-shadow: 1px 1px 2px;
+}
+
+.post-it h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.form-row{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-row label{
+    text-wrap: nowrap;
+}
+
+.form-row input[type='email'],
+.form-row input[type='password']{
+    display: flex;
+    height: var(--line-height);
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background-color: transparent;
+}
+
+.form-row a{
+    color: blueviolet;
+}
+
+.form-row input[type='submit']{
+    padding: .5rem 1rem;
+    margin-left: auto;
+}

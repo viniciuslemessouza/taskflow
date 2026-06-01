@@ -1,4 +1,7 @@
 {% extends 'main/layout.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock style %}
 {% block content %}
     <form class="profile-form" method="POST" action="" enctype="multipart/form-data" novalidate>
         <h2>My Account</h2>

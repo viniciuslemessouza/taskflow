@@ -1,7 +1,11 @@
 {% extends 'main/layout.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock style %}
 {% block content %}
-    <form class="post-it login-form" method="POST" action="" novalidate>
+    <form class="post-it register-form" method="POST" action="" novalidate>
         {{ form.hidden_tag() }}
+        <h2>{{ title }}</h2>
         <div class="form-row">
             {{ form.email.label }} <span>:</span> {{ form.email }}
             {% if form.email.errors %}
@@ -33,7 +37,15 @@
             {% endif %}
         </div>
         <div class="form-row">
-            <label for="terms">{{ form.terms }} Agree to <a href="#">{{ form.terms.label }}</a></span>
+            <div class="terms-container">
+                {{ form.terms }}
+                <label for="terms">
+                    Agree to
+                    <a class="terms-link" href="#">
+                        {{ form.terms.label.text }}
+                    </a>
+                </label>
+            </div>
             {% if form.terms.errors %}
                 <div class="validation-errors-popup">
                     {% for error in form.terms.errors %}
