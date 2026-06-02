@@ -10,3 +10,7 @@ def home():
 @main.route('/terms')
 def terms():
     return render_template('main/terms.html', title="Terms and Conditions")
+
+@main.route('/notebooks')
+def notebooks():
+    return render_template('main/notebooks.html')

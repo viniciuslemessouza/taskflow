@@ -7,7 +7,7 @@ users = Blueprint("users", __name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect('home')
+        return redirect('notebooks')
     else:
         return render_template('users/login.html', title="Login", form=form)
 
@@ -15,7 +15,7 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        return redirect('home')
+        return redirect('notebooks')
     else:
         return render_template('users/register.html', title="Register", form=form)
 
@@ -31,7 +31,7 @@ def password_recovery():
 def set_new_password():
     form = SetNewPassword()
     if form.validate_on_submit():
-        return redirect('home')
+        return redirect('notebooks')
     else:
         return render_template('users/new_password.html', title="New Password", form=form)
 
