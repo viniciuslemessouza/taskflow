@@ -1,18 +1,28 @@
 {% extends 'main/layout.html' %}
 {% block style %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
 {% endblock style %}
+{% block script %}
+    <script defer src="{{ url_for('static', filename='js/account.js') }}"></script>
+{% endblock script %}
 {% block content %}
-    <form class="profile-form" method="POST" action="" enctype="multipart/form-data" novalidate>
-        <h2>My Account</h2>
-        <div class="profile-picture">
+    <form class="account-form" method="POST" action="" enctype="multipart/form-data" novalidate>
+        <h2>{{ title }}</h2>
+        <label for="profile_picture" class="profile-image">
             {{ form.profile_picture }}
+            <img class="clip clip-under" src="{{ url_for('static', filename='assets/clip_under.png') }}" alt="paper clip">
+            <img class="clip clip-over" src="{{ url_for('static', filename='assets/clip_over.png') }}" alt="paper clip">
+            <div class="image_container">
+                <img id="profile-preview" class="loaded_image" src="{{ url_for('static', filename='profile_pictures/default.png') }}" alt="profile picture">
+            </div>
+        </label>
+        <div class="form-row">
+            {{ form.fullname.label }}
+            {{ form.fullname }}
         </div>
         <div class="form-row">
-            {{ form.fullname.label }} <span>:</span> {{ form.fullname }}
-        </div>
-        <div class="form-row">
-            {{ form.email.label }} <span>:</span> {{ form.email }}
+            {{ form.email.label }}
+            {{ form.email }}
         </div>
         <div class="form-row">
             {{ form.submit }}

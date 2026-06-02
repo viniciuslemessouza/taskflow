@@ -20,7 +20,7 @@ class AccountForm(FlaskForm):
     fullname = StringField('Full name', validators=[Length(min=8, max=150)])
     email = EmailField('Email', validators=[Email()])
     profile_picture = FileField('Profile picture', validators=[FileAllowed(['png', 'jpg', 'jpeg'])])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Update')
 
 class PasswordRecoveryForm(FlaskForm):
     email = EmailField('Email', validators=[Email()])
