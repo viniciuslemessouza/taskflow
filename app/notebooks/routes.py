@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from app.notebooks.forms import NewNotebookForm
+from app.notebooks.forms import NewNotebookForm, NewTaskForm
 
 notebooks = Blueprint('notebooks', __name__)
 
@@ -10,5 +10,5 @@ def get_notebooks():
 
 @notebooks.route('/notebook/<notebook_id>')
 def get_notebook(notebook_id):
-    form = NewNotebookForm()
+    form = NewTaskForm()
     return render_template('notebooks/notebook.html', form=form)

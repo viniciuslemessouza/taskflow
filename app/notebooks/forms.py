@@ -5,3 +5,7 @@ from wtforms.validators import DataRequired
 class NewNotebookForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Add')
+
+class NewTaskForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('Add')
