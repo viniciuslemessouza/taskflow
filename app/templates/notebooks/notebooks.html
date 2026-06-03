@@ -1,0 +1,45 @@
+{% extends 'main/layout.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notebooks.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock style %}
+{% block content %}
+    <div id="notebooks-container" class="notebooks-container not-editing">
+        <div class="list-header">
+            <h2>Notebooks</h2>
+            <div class="icon-container">
+                <button id="edit-btn" class="material-symbols-outlined btn edit-btn">edit</button>
+                <button id="check-btn" class="material-symbols-outlined btn check-btn">check</button>
+            </div>
+        </div>
+        <ul id="notebooks-list">
+            <li class="notebook">
+                <a href="#">
+                    <span class="list-number">001</span> - <span class="list-name">Home chores</span> - 
+                    <span class="progress">95%</span>
+                </a>
+                <div class="edit-options">
+                    <button class="material-symbols-outlined btn delete-btn">delete</button>
+                </div>
+            </li>
+            <li class="notebook">
+                <a href="#">
+                    <span class="list-number">002</span> - <span class="list-name">Workout</span> - 
+                    <span class="progress">10%</span>
+                </a>
+                <div class="edit-options">
+                    <button class="material-symbols-outlined btn delete-btn">delete</button>
+                </div>
+            </li>
+        </ul>
+        <div class="new-notebook">
+            <form class="post-it login-form" method="POST" action="" novalidate autocomplete="off">
+                {{ form.hidden_tag() }}
+                <div class="form-row">
+                    {{ form.name(id='new-notebook-input') }}
+                    {{ form.submit(class='material-symbols-outlined') }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
