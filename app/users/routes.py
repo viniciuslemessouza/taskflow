@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, redirect, flash
+from app import bcrypt, db
+from app.users.models import User
+from flask import Blueprint, render_template, redirect, flash, url_for
 from app.users.forms import LoginForm, RegisterForm, AccountForm, PasswordRecoveryForm, SetNewPassword
 
 users = Blueprint("users", __name__)
@@ -7,7 +9,8 @@ users = Blueprint("users", __name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect('notebooks')
+        flash('Logged In', 'success')
+        return redirect(url_for('notebooks.get_notebooks'))
     else:
         return render_template('users/login.html', title="Login", form=form)
 
@@ -15,7 +18,12 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        return redirect('notebooks')
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        user = User(email=form.email.data, password=hashed_password, terms_agreement=form.terms.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Logged In', 'success')
+        return redirect(url_for('users.login'))
     else:
         return render_template('users/register.html', title="Register", form=form)
 
@@ -23,7 +31,7 @@ def register():
 def password_recovery():
     form = PasswordRecoveryForm()
     if form.validate_on_submit():
-        return redirect('home')
+        return redirect(url_for('main.home'))
     else:
         return render_template('users/password_recovery.html', title="Password Recovery", form=form)
 
@@ -31,7 +39,7 @@ def password_recovery():
 def set_new_password():
     form = SetNewPassword()
     if form.validate_on_submit():
-        return redirect('notebooks')
+        return redirect(url_for('notebooks.get_notebooks'))
     else:
         return render_template('users/new_password.html', title="New Password", form=form)
 

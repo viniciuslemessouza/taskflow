@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
+from app.users.models import User
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-from wtforms import EmailField, PasswordField, BooleanField, SubmitField, StringField
+from wtforms import EmailField, PasswordField, BooleanField, SubmitField, StringField, ValidationError
 
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email()])
@@ -15,6 +16,11 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     terms = BooleanField('terms', validators=[DataRequired('You need to agree with our terms.')])
     submit = SubmitField('Submit')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(f'"{self.email.data}" is already in use!')
 
 class AccountForm(FlaskForm):
     fullname = StringField('Full name', validators=[Length(min=8, max=150)])
