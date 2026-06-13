@@ -1,5 +1,7 @@
+import app.users.utils
 from app import bcrypt, db
 from app.users.models import User
+from flask_login import login_user, login_required, logout_user
 from flask import Blueprint, render_template, redirect, flash, url_for
 from app.users.forms import LoginForm, RegisterForm, AccountForm, PasswordRecoveryForm, SetNewPassword
 
@@ -9,10 +11,14 @@ users = Blueprint("users", __name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Logged In', 'success')
-        return redirect(url_for('notebooks.get_notebooks'))
-    else:
-        return render_template('users/login.html', title="Login", form=form)
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, form.remember)
+            flash('Logged In', 'success')
+            return redirect(url_for('notebooks.get_notebooks'))
+        else:
+            flash('Please check password and email.', 'warning')
+    return render_template('users/login.html', title="Login", form=form)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
@@ -22,7 +28,7 @@ def register():
         user = User(email=form.email.data, password=hashed_password, terms_agreement=form.terms.data)
         db.session.add(user)
         db.session.commit()
-        flash('Logged In', 'success')
+        flash("You're now registered. Please log in.", 'success')
         return redirect(url_for('users.login'))
     else:
         return render_template('users/register.html', title="Register", form=form)
@@ -44,10 +50,12 @@ def set_new_password():
         return render_template('users/new_password.html', title="New Password", form=form)
 
 @users.route('/account', methods=['GET', 'POST'])
+@login_required
 def account():
     form = AccountForm()
     return render_template('users/account.html', title="Account", form=form)
 
 @users.route('/logout')
 def logout():
+    logout_user()
     return redirect('home')
