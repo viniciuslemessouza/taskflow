@@ -13,7 +13,8 @@
     margin-bottom: 4rem;
 }
 
-#notebooks-list{
+#notebooks-list,
+#task-list{
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     display: flex;
@@ -21,7 +22,8 @@
     gap: 1rem;
 }
 
-.notebook{
+.notebook,
+.task{
     list-style: none;
     display: flex;
     width: 100%;
@@ -31,14 +33,18 @@
     gap: 1rem;
 }
 
-.notebook a, label{
+.notebook a,
+.task a,
+label{
     display: flex;
     gap: .5rem;
     width: 100%;
     overflow: hidden;
     user-select: none;
+    cursor: pointer;
 }
 
+.task label:has(input:checked),
 .notebook label:has(input:checked){
     text-decoration: line-through;
 }
@@ -48,26 +54,30 @@
     user-select: none;
 }
 
-.notebook .list-name{
+.notebook .list-name,
+.task .list-name{
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.task .progress,
 .notebook .progress{
     margin-left: auto;
 }
 
-.form-row{
+.new-task .form-row,
+.new-notebook .form-row{
     display: flex;
     align-items: center;
     width: 100%;
     gap: 1rem;
     height: 3.2rem;
-    margin-top: 1rem;
+    margin: 1rem 0rem;
 }
 
-.form-row input[type='text']{
+.new-task .form-row input[type='text'],
+.new-notebook .form-row input[type='text']{
     font-size: 1.4rem;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -94,4 +104,29 @@
     display: none !important;
     pointer-events: none;
     user-select: none;
+}
+
+.navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
+.navigation a,
+.navigation span{
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation span{
+    width: 3rem;
+}
+
+.current-page{
+    color: blue;
+    font-weight: bold;
 }

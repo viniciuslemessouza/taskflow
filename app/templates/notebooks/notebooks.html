@@ -13,34 +13,40 @@
                 <button class="material-symbols-outlined btn check-btn" onclick="view_mode()">check</button>
             </div>
         </div>
-        <ul id="notebooks-list">
-            <li class="notebook">
-                <a href="#">
-                    <span class="list-number">001</span> - <span class="list-name">Home chores</span> - 
-                    <span class="progress">95%</span>
-                </a>
-                <div class="edit-options">
-                    <button class="material-symbols-outlined btn delete-btn">delete</button>
-                </div>
-            </li>
-            <li class="notebook">
-                <a href="#">
-                    <span class="list-number">002</span> - <span class="list-name">Workout</span> - 
-                    <span class="progress">10%</span>
-                </a>
-                <div class="edit-options">
-                    <button class="material-symbols-outlined btn delete-btn">delete</button>
-                </div>
-            </li>
-        </ul>
         <div class="new-notebook">
-            <form class="post-it login-form" method="POST" action="" novalidate autocomplete="off">
+            <form method="POST" action="" novalidate autocomplete="off">
                 {{ form.hidden_tag() }}
                 <div class="form-row">
                     {{ form.name(id='new-notebook-input') }}
                     {{ form.submit(class='material-symbols-outlined') }}
                 </div>
             </form>
+        </div>
+        <ul id="notebooks-list">
+            {% for notebook in notebooks %}
+                <li class="notebook">
+                    <a href="{{ url_for('notebooks.get_notebook', notebook_id=notebook.id) }}">
+                        <span class="list-number">{{ "%03d"|format((notebooks.page-1)*notebooks.per_page+loop.index) }}</span> - <span class="list-name">{{notebook.title}}</span> - 
+                        <span class="progress">95%</span>
+                    </a>
+                    <div class="edit-options">
+                        <button class="material-symbols-outlined btn delete-btn">delete</button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="navigation">
+            {% for page_num in notebooks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                {% if page_num %}
+                    {% if page_num == notebooks.page %} 
+                        <a class="btn-icon current-page" href="{{url_for('notebooks.get_notebooks', page=page_num)}}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="btn-icon" href="{{url_for('notebooks.get_notebooks', page=page_num)}}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    <span>...</span>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}

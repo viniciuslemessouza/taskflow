@@ -7,32 +7,17 @@
 {% block content %}
     <div id="notebooks-container" class="notebooks-container not-editing">
         <div class="list-header">
-            <h2>Home chores</h2>
+            <div class="icon-container">
+                <a class="material-symbols-outlined btn" href="{{ request.referrer }}">keyboard_arrow_left</a>
+            </div>
+            <h2>{{notebook_title}}</h2>
             <div class="icon-container">
                 <button class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
                 <button class="material-symbols-outlined btn check-btn" onclick="view_mode()">check</button>
             </div>
         </div>
-        <ul id="notebooks-list">
-            <li class="notebook">
-                <label>
-                    <input type="checkbox"><span class="list-number">001</span> - <span class="list-name">Stroll the dog</span>
-                </label>
-                <div class="edit-options">
-                    <button class="material-symbols-outlined btn delete-btn">delete</button>
-                </div>
-            </li>
-            <li class="notebook">
-                <label>
-                    <input type="checkbox"><span class="list-number">002</span> - <span class="list-name">Take the trash out</span>
-                </label>
-                <div class="edit-options">
-                    <button class="material-symbols-outlined btn delete-btn">delete</button>
-                </div>
-            </li>
-        </ul>
         <div class="new-task">
-            <form class="post-it login-form" method="POST" action="" novalidate autocomplete="off">
+            <form method="POST" action="" novalidate autocomplete="off">
                 {{ form.hidden_tag() }}
                 <div class="form-row">
                     {{ form.name(id='new-task-input') }}
@@ -40,5 +25,17 @@
                 </div>
             </form>
         </div>
+        <ul id="task-list">
+            {% for task in tasks %}
+                <li class="task">
+                    <label>
+                        <input type="checkbox"><span class="list-number">{{ "%03d"|format(loop.index) }}</span> - <span class="list-name">{{task.content}}</span>
+                    </label>
+                    <div class="edit-options">
+                        <button class="material-symbols-outlined btn delete-btn">delete</button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock content %}
