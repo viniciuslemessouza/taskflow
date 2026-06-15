@@ -2,14 +2,15 @@
 {% block style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notebooks.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script defer src="{{ url_for('static', filename='js/notebooks.js') }}"></script>
 {% endblock style %}
 {% block content %}
     <div id="notebooks-container" class="notebooks-container not-editing">
         <div class="list-header">
             <h2>Notebooks</h2>
             <div class="icon-container">
-                <button id="edit-btn" class="material-symbols-outlined btn edit-btn">edit</button>
-                <button id="check-btn" class="material-symbols-outlined btn check-btn">check</button>
+                <button class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
+                <button class="material-symbols-outlined btn check-btn" onclick="view_mode()">check</button>
             </div>
         </div>
         <ul id="notebooks-list">
