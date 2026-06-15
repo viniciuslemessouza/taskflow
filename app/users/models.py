@@ -8,3 +8,4 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     terms_agreement = db.Column(db.Boolean, nullable=False, default=False)
     profile_picture = db.Column(db.String(20), nullable=False, default="default.png")
+    notebooks = db.relationship("Notebook", backref="user", lazy=True)

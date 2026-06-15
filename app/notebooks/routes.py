@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from app.notebooks.forms import NewNotebookForm, NewTaskForm
+from app.notebooks.models import Notebook, Task
 
 notebooks = Blueprint('notebooks', __name__)
 
