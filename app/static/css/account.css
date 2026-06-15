@@ -9,13 +9,16 @@
     gap: 2rem;
     padding-top: 4rem;
     align-items: center;
+    background-color:rgb(255, 255, 255);
+    box-shadow: 1px 1px 2px;
+    position: relative;
 }
 
 .profile-image{
     display: flex;
     position: absolute;
     left: 0%;
-    top: calc(3 * var(--line-height));
+    top: 1rem;
     align-items: center;
     justify-content: center;
     cursor: pointer;
