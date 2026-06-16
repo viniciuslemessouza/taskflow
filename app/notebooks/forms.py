@@ -3,9 +3,9 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 class NewNotebookForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    submit = SubmitField('Add')
+    title = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('check')
 
 class NewTaskForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    submit = SubmitField('Add')
+    content = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('check')

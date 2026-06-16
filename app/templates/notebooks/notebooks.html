@@ -6,42 +6,50 @@
 {% endblock style %}
 {% block content %}
     <div id="notebooks-container" class="notebooks-container not-editing">
-        <div class="list-header">
-            <h2>Notebooks</h2>
-            <div class="icon-container">
-                <button class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
-                <button class="material-symbols-outlined btn check-btn" onclick="view_mode()">check</button>
-            </div>
-        </div>
-        <div class="new-notebook">
-            <form method="POST" action="" novalidate autocomplete="off">
-                {{ form.hidden_tag() }}
-                <div class="form-row">
-                    {{ form.name(id='new-notebook-input') }}
-                    {{ form.submit(class='material-symbols-outlined') }}
+        <form method="POST" action="" novalidate autocomplete="off">
+            {{ form.hidden_tag() }}
+            <div class="list-header">
+                <h2>Notebooks</h2>
+                <div class="icon-container">
+                    <button type="button" class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
+                    <button type="submit" class="material-symbols-outlined btn check-btn">check</button>
                 </div>
-            </form>
-        </div>
-        <ul id="notebooks-list">
-            {% for notebook in notebooks %}
-                <li class="notebook">
-                    <a href="{{ url_for('notebooks.get_notebook', notebook_id=notebook.id) }}">
-                        <span class="list-number">{{ "%03d"|format((notebooks.page-1)*notebooks.per_page+loop.index) }}</span> - <span class="list-name">{{notebook.title}}</span> - 
-                        <span class="progress">95%</span>
-                    </a>
-                    <div class="edit-options">
-                        <button class="material-symbols-outlined btn delete-btn">delete</button>
+            </div>
+            <div class="new-notebook">
+                <div class="form-row">
+                    {{ form.title(id='new-notebook-input') }}
+                    <button type="button" class="material-symbols-outlined btn" onclick="addNotebook()">add</button>
+                </div>
+            </div>
+            <ul id="notebooks-list">
+                {% if notebooks.items %}
+                    {% for notebook in notebooks.items %}
+                        <li class="notebook">
+                            <a href="{{ url_for('notebooks.get_notebook', notebook_id=notebook.id) }}">
+                                <span class="list-number">{{ "%03d"|format((notebooks.page - 1) * notebooks.per_page + loop.index) }}</span> - <span class="list-name">{{ notebook.title }}</span> - <span class="progress">{{ notebook.progress }}%</span>
+                            </a>
+                            <input type="hidden" name="existing_notebooks" value="{{ notebook.id }}">
+                            <div class="edit-options">
+                                <button type="button" class="material-symbols-outlined btn delete-btn" onclick="removeNotebook(this)">delete</button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <h2>No notebook created</h2>
+                        <p>Organize your ideas, projects, and tasks by creating your first notebook.</p>
+                        <p>Click the <strong>+</strong> button to get started.</p>
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
+                {% endif %}
+            </ul>
+        </form>
         <div class="navigation">
             {% for page_num in notebooks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
                 {% if page_num %}
-                    {% if page_num == notebooks.page %} 
-                        <a class="btn-icon current-page" href="{{url_for('notebooks.get_notebooks', page=page_num)}}">{{ page_num }}</a>
+                    {% if page_num == notebooks.page %}
+                        <a class="btn-icon current-page" href="{{ url_for('notebooks.get_notebooks', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="btn-icon" href="{{url_for('notebooks.get_notebooks', page=page_num)}}">{{ page_num }}</a>
+                        <a class="btn-icon" href="{{ url_for('notebooks.get_notebooks', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     <span>...</span>

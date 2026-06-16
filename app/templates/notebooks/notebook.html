@@ -6,36 +6,49 @@
 {% endblock style %}
 {% block content %}
     <div id="notebooks-container" class="notebooks-container not-editing">
-        <div class="list-header">
-            <div class="icon-container">
-                <a class="material-symbols-outlined btn" href="{{ request.referrer }}">keyboard_arrow_left</a>
-            </div>
-            <h2>{{notebook_title}}</h2>
-            <div class="icon-container">
-                <button class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
-                <button class="material-symbols-outlined btn check-btn" onclick="view_mode()">check</button>
-            </div>
-        </div>
-        <div class="new-task">
-            <form method="POST" action="" novalidate autocomplete="off">
-                {{ form.hidden_tag() }}
-                <div class="form-row">
-                    {{ form.name(id='new-task-input') }}
-                    {{ form.submit(class='material-symbols-outlined') }}
+        <form method="POST" action="" novalidate autocomplete="off">
+            {{ form.hidden_tag() }}
+            <div class="list-header">
+                <div class="icon-container">
+                    <a class="material-symbols-outlined btn" href="{{ url_for('notebooks.get_notebooks', page=request.args.get('page', 1)) }}">
+                        keyboard_arrow_left
+                    </a>
                 </div>
-            </form>
-        </div>
-        <ul id="task-list">
-            {% for task in tasks %}
-                <li class="task">
-                    <label>
-                        <input type="checkbox"><span class="list-number">{{ "%03d"|format(loop.index) }}</span> - <span class="list-name">{{task.content}}</span>
-                    </label>
-                    <div class="edit-options">
-                        <button class="material-symbols-outlined btn delete-btn">delete</button>
+                <h2>{{ notebook_title }}</h2>
+                <div class="icon-container">
+                    <button type="button" class="material-symbols-outlined btn edit-btn" onclick="editing_mode()">edit</button>
+                    {{ form.submit(class='material-symbols-outlined btn check-btn') }}
+                </div>
+            </div>
+            <div class="new-task">
+                <div class="form-row">
+                    {{ form.content(id='new-task-input') }}
+                    <button type="button" class="material-symbols-outlined btn" onclick="addItem()">add</button>
+                </div>
+            </div>
+            <ul id="task-list">
+                {% if tasks.items %}
+                    {% for task in tasks %}
+                        <li class="task">
+                            <label>
+                                <input type="checkbox" class="task-status-checkbox" data-task-id="{{ task.id }}" {% if task.status %}checked{% endif %}>
+                                <span class="list-number">{{ "%03d"|format(loop.index) }}</span> - <span class="list-name">{{ task.content }}</span>
+                            </label>
+                            <input type="hidden" name="existing_tasks" value="{{ task.id }}">
+                            <input type="hidden" name="task_order" value="{{ task.id }}">
+                            <input type="hidden" name="task_status" value="{{ task.id }}:{{ 1 if task.status else 0 }}">
+                            <div class="edit-options">
+                                <button type="button" class="material-symbols-outlined btn delete-btn" onclick="removeItem(this)">delete</button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <h3>No tasks created</h3>
+                        <p>Add your first task to start organizing this notebook.</p>
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
+                {% endif %}
+            </ul>
+        </form>
     </div>
 {% endblock content %}
