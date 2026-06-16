@@ -1,8 +1,9 @@
-import app.users.utils
+import os
 from app import bcrypt, db
 from app.users.models import User
-from flask_login import login_user, login_required, logout_user
-from flask import Blueprint, render_template, redirect, flash, url_for
+from app.users.utils import save_picture, delete_picture
+from flask_login import login_user, login_required, logout_user, current_user
+from flask import Blueprint, render_template, redirect, flash, url_for, request, current_app
 from app.users.forms import LoginForm, RegisterForm, AccountForm, PasswordRecoveryForm, SetNewPassword
 
 users = Blueprint("users", __name__)
@@ -53,7 +54,41 @@ def set_new_password():
 @login_required
 def account():
     form = AccountForm()
-    return render_template('users/account.html', title="Account", form=form)
+
+    filename = current_user.profile_picture
+
+    profile_path = os.path.join(current_app.root_path, 'static', 'profile_pictures', filename)
+
+    if not os.path.exists(profile_path):
+        image_file = url_for('static', filename='profile_pictures/default.png')
+    else:
+        image_file = url_for('static', filename=f'profile_pictures/{filename}')
+
+    if form.validate_on_submit():
+
+        if form.profile_picture.data:
+            old_picture = current_user.profile_picture
+
+            filename = save_picture(form.profile_picture.data)
+
+            current_user.profile_picture = filename
+
+            delete_picture(old_picture)
+
+        current_user.fullname = form.fullname.data
+        current_user.email = form.email.data
+
+        db.session.commit()
+
+        flash('Account updated!', 'success')
+
+        return redirect(url_for('users.account'))
+
+    elif request.method == 'GET':
+        form.fullname.data = current_user.fullname
+        form.email.data = current_user.email
+
+    return render_template('users/account.html', title='My Account', form=form, image_file=image_file)
 
 @users.route('/logout')
 def logout():

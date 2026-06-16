@@ -1,31 +1,83 @@
 {% extends 'main/layout.html' %}
+
 {% block style %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
 {% endblock style %}
+
 {% block script %}
-    <script defer src="{{ url_for('static', filename='js/account.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/account.js') }}"></script>
 {% endblock script %}
+
 {% block content %}
-    <form class="account-form" method="POST" action="" enctype="multipart/form-data" novalidate>
-        <h2>{{ title }}</h2>
-        <label for="profile_picture" class="profile-image">
-            {{ form.profile_picture }}
-            <img class="clip clip-under" src="{{ url_for('static', filename='assets/clip_under.png') }}" alt="paper clip">
-            <img class="clip clip-over" src="{{ url_for('static', filename='assets/clip_over.png') }}" alt="paper clip">
-            <div class="image_container">
-                <img id="profile-preview" class="loaded_image" src="{{ url_for('static', filename='profile_pictures/default.png') }}" alt="profile picture">
+<form class="account-form" method="POST" enctype="multipart/form-data" novalidate>
+
+    {{ form.hidden_tag() }}
+
+    <h2>{{ title }}</h2>
+
+    <label for="profile_picture" class="profile-image">
+
+        {{ form.profile_picture }}
+
+        <img class="clip clip-under"
+             src="{{ url_for('static', filename='assets/clip_under.png') }}"
+             alt="paper clip">
+
+        <img class="clip clip-over" src="{{ url_for('static', filename='assets/clip_over.png') }}" alt="paper clip">
+
+        <div class="image_container">
+            <img id="profile-preview" class="loaded_image" src="{{ image_file }}"  alt="profile picture">
+        </div>
+
+    </label>
+
+    {% if form.profile_picture.errors %}
+        <div class="field-errors">
+            {% for error in form.profile_picture.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="form-row">
+
+        {{ form.fullname.label }}
+
+        {% if form.fullname.errors %}
+            {{ form.fullname(class="input-error") }}
+
+            <div class="field-errors">
+                {% for error in form.fullname.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
             </div>
-        </label>
-        <div class="form-row">
-            {{ form.fullname.label }}
+        {% else %}
             {{ form.fullname }}
-        </div>
-        <div class="form-row">
-            {{ form.email.label }}
+        {% endif %}
+
+    </div>
+
+    <div class="form-row">
+
+        {{ form.email.label }}
+
+        {% if form.email.errors %}
+            {{ form.email(class="input-error") }}
+
+            <div class="field-errors">
+                {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
             {{ form.email }}
-        </div>
-        <div class="form-row">
-            {{ form.submit }}
-        </div>
-    </form>
+        {% endif %}
+
+    </div>
+
+    <div class="form-row">
+        {{ form.submit }}
+    </div>
+
+</form>
 {% endblock content %}

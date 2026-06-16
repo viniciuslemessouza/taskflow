@@ -101,3 +101,7 @@
     padding: .5rem 1rem;
     margin-left: auto;
 }
+
+.field-errors{
+    color: red;
+}
